@@ -62,7 +62,7 @@ public class RedisBloomFilter {
      * @param value
      * @return
      */
-    public static boolean[] existsMulti(Jedis jedis, String key, String... value) {
+    public static List<Long> existsMulti(Jedis jedis, String key, String... value) {
         ArrayList<String> arr = new ArrayList<String>();
         arr.add(key);
         arr.addAll(Arrays.asList(value));
@@ -71,11 +71,7 @@ public class RedisBloomFilter {
         client.sendCommand(Command.MEXISTS, (String[]) arr.toArray((String[]) value));
         List<Long> replyLongList = client.getIntegerMultiBulkReply();
 
-        boolean[] ret = new boolean[value.length];
-        for (int i = 0; i < replyLongList.size(); i++) {
-            ret[i] = replyLongList.get(i) != 0;
-        }
-        return ret;
+        return replyLongList;
     }
 
     /**
@@ -93,4 +89,13 @@ public class RedisBloomFilter {
         return client.getStatusCodeReply();
     }
 
+
+    public static void main(String[] args) {
+        String userKey = args[0];
+        Jedis jedis = RedisUtil.getUserJedis(userKey, 1);
+        Client client = jedis.getClient();
+        boolean[] booleans = addMulti(jedis, userKey, new String[]{"ucms_1", "ucms_2", "ucms_3"});
+        for (boolean b : booleans)
+            System.out.println(b);
+    }
 }
