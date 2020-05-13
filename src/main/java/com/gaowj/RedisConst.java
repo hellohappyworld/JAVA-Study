@@ -6,14 +6,14 @@ package com.gaowj;
  * redis常量
  */
 public final class RedisConst {
-//    public static final String HOST11 = "10.90.18.11";
+    //    public static final String HOST11 = "10.90.18.11";
     public static final String HOST11 = "10.90.124.154";
-//    public static final String HOST12 = "10.90.18.12";
+    //    public static final String HOST12 = "10.90.18.12";
     public static final String HOST12 = "10.90.125.154";
-//    public static final String HOST13 = "10.90.18.13";
-    public static final String HOST13 = "10.80.32.158";
-//    public static final int PORT = 6379;
-    public static final int PORT = 80;
+    public static final String HOST13 = "10.90.18.13";
+    //    public static final String HOST13 = "10.80.32.158";
+    public static final int PORT = 6379;
+    //    public static final int PORT = 80;
     public static final String PASSWORD = "WxDCxfA8qi";
 
     public static final String HOST_121_139 = "10.90.121.139";

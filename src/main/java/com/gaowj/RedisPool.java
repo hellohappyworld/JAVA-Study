@@ -1,10 +1,13 @@
 package com.gaowj;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
 public class RedisPool {
+    private static final Logger logger = LoggerFactory.getLogger(RedisPool.class);
     //服务器IP地址
     private static String ADDR = "10.90.18.16";
     //抓取文章列表
@@ -23,7 +26,7 @@ public class RedisPool {
     private static String AUTH = "password";
     private static String GRA_REC_AUTH = "WxDCxfA8qi";
     //连接实例的最大连接数
-    private static int MAX_ACTIVE = 3000;
+    private static int MAX_ACTIVE = 30000;
     //控制一个pool最多有多少个状态为idle(空闲的)的jedis实例，默认值也是8。
     private static int MAX_IDLE = 800;
     //等待可用连接的最大时间，单位毫秒，默认值为-1，表示永不超时。如果超过等待时间，则直接抛出JedisConnectionException
@@ -104,8 +107,11 @@ public class RedisPool {
 
     public static Jedis getJedis121_7001(int db) {
         try {
-            if (jedisPool121_7001 != null)
-                return jedisPool121_7001.getResource();
+            if (jedisPool121_7001 != null){
+                Jedis jedis = jedisPool121_7001.getResource();
+                jedis.select(db);
+                return jedis;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -114,8 +120,11 @@ public class RedisPool {
 
     public static Jedis getJedis122_7001(int db) {
         try {
-            if (jedisPool122_7001 != null)
-                return jedisPool122_7001.getResource();
+            if (jedisPool122_7001 != null){
+                Jedis jedis = jedisPool122_7001.getResource();
+                jedis.select(db);
+                return jedis;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -124,8 +133,11 @@ public class RedisPool {
 
     public static Jedis getJedis123_7001(int db) {
         try {
-            if (jedisPool123_7001 != null)
-                return jedisPool123_7001.getResource();
+            if (jedisPool123_7001 != null){
+                Jedis jedis = jedisPool123_7001.getResource();
+                jedis.select(db);
+                return jedis;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -134,8 +146,11 @@ public class RedisPool {
 
     public static Jedis getJedis124_7001(int db) {
         try {
-            if (jedisPool124_7001 != null)
-                return jedisPool124_7001.getResource();
+            if (jedisPool124_7001 != null){
+                Jedis jedis = jedisPool124_7001.getResource();
+                jedis.select(db);
+                return jedis;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -144,8 +159,11 @@ public class RedisPool {
 
     public static Jedis getJedis125_7001(int db) {
         try {
-            if (jedisPool125_7001 != null)
-                return jedisPool125_7001.getResource();
+            if (jedisPool125_7001 != null){
+                Jedis jedis = jedisPool125_7001.getResource();
+                jedis.select(db);
+                return jedis;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -154,8 +172,11 @@ public class RedisPool {
 
     public static Jedis getJedis126_7001(int db) {
         try {
-            if (jedisPool126_7001 != null)
-                return jedisPool126_7001.getResource();
+            if (jedisPool126_7001 != null){
+                Jedis jedis = jedisPool126_7001.getResource();
+                jedis.select(db);
+                return jedis;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -164,8 +185,11 @@ public class RedisPool {
 
     public static Jedis getJedis121_7002(int db) {
         try {
-            if (jedisPool121_7002 != null)
-                return jedisPool121_7002.getResource();
+            if (jedisPool121_7002 != null){
+                Jedis jedis = jedisPool121_7002.getResource();
+                jedis.select(db);
+                return jedis;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -174,8 +198,11 @@ public class RedisPool {
 
     public static Jedis getJedis122_7002(int db) {
         try {
-            if (jedisPool122_7002 != null)
-                return jedisPool122_7002.getResource();
+            if (jedisPool122_7002 != null){
+                Jedis jedis = jedisPool122_7002.getResource();
+                jedis.select(db);
+                return jedis;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -184,8 +211,11 @@ public class RedisPool {
 
     public static Jedis getJedis123_7002(int db) {
         try {
-            if (jedisPool123_7002 != null)
-                return jedisPool123_7002.getResource();
+            if (jedisPool123_7002 != null){
+                Jedis jedis = jedisPool123_7002.getResource();
+                jedis.select(db);
+                return jedis;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -194,8 +224,11 @@ public class RedisPool {
 
     public static Jedis getJedis124_7002(int db) {
         try {
-            if (jedisPool124_7002 != null)
-                return jedisPool124_7002.getResource();
+            if (jedisPool124_7002 != null){
+                Jedis jedis = jedisPool124_7002.getResource();
+                jedis.select(db);
+                return jedis;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -204,8 +237,11 @@ public class RedisPool {
 
     public static Jedis getJedis125_7002(int db) {
         try {
-            if (jedisPool125_7002 != null)
-                return jedisPool125_7002.getResource();
+            if (jedisPool125_7002 != null){
+                Jedis jedis = jedisPool125_7002.getResource();
+                jedis.select(db);
+                return jedis;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -214,8 +250,11 @@ public class RedisPool {
 
     public static Jedis getJedis126_7002(int db) {
         try {
-            if (jedisPool126_7002 != null)
-                return jedisPool126_7002.getResource();
+            if (jedisPool126_7002 != null){
+                Jedis jedis = jedisPool126_7002.getResource();
+                jedis.select(db);
+                return jedis;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

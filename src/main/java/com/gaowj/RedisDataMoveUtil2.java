@@ -58,13 +58,14 @@ public class RedisDataMoveUtil2 {
         config.setMaxIdle(MAX_IDLE);
         config.setMaxWaitMillis(MAX_WAIT);
         config.setTestOnBorrow(TEST_ON_BORROW);
-        jedisSinglePool = new JedisPool(config, "10.80.32.158", 80, TIMEOUT, "WxDCxfA8qi");
+//        jedisSinglePool = new JedisPool(config, "10.80.32.158", 80, TIMEOUT, "WxDCxfA8qi");
+        jedisSinglePool = new JedisPool(config, "10.90.125.154", 80, TIMEOUT, "WxDCxfA8qi");
         jedisPool1 = new JedisPool(config, HOST_121_139, PORT7001, TIMEOUT, PASSWORD_7001_7002);
         jedisPool2 = new JedisPool(config, HOST_122_138, PORT7001, TIMEOUT, PASSWORD_7001_7002);
         jedisPool3 = new JedisPool(config, HOST_123_138, PORT7001, TIMEOUT, PASSWORD_7001_7002);
         jedisPool4 = new JedisPool(config, HOST_124_154, PORT7001, TIMEOUT, PASSWORD_7001_7002);
-        jedisPool11 = new JedisPool(config, HOST_125_154, PORT7001, TIMEOUT, PASSWORD_7001_7002);
-        jedisPool12 = new JedisPool(config, HOST_126_154, PORT7001, TIMEOUT, PASSWORD_7001_7002);
+//        jedisPool11 = new JedisPool(config, HOST_125_154, PORT7001, TIMEOUT, PASSWORD_7001_7002);
+//        jedisPool12 = new JedisPool(config, HOST_126_154, PORT7001, TIMEOUT, PASSWORD_7001_7002);
 
         jedisPool5 = new JedisPool(config, HOST_121_139, PORT7002, TIMEOUT, PASSWORD_7001_7002);
         jedisPool6 = new JedisPool(config, HOST_122_138, PORT7002, TIMEOUT, PASSWORD_7001_7002);
@@ -74,20 +75,20 @@ public class RedisDataMoveUtil2 {
         jedisPool10 = new JedisPool(config, HOST_126_154, PORT7002, TIMEOUT, PASSWORD_7001_7002);
 
         ArrayList<Object[]> jedisList = new ArrayList<>();
-//        jedisList.add(new Object[]{"HOST_121_139_7001", jedisPool1});
-//        jedisList.add(new Object[]{"HOST_122_138_7001", jedisPool2});
-//        jedisList.add(new Object[]{"HOST_123_138_7001", jedisPool3});
-//        jedisList.add(new Object[]{"HOST_124_154_7001", jedisPool4});
+        jedisList.add(new Object[]{"HOST_121_139_7001", jedisPool1});
+        jedisList.add(new Object[]{"HOST_122_138_7001", jedisPool2});
+        jedisList.add(new Object[]{"HOST_123_138_7001", jedisPool3});
+        jedisList.add(new Object[]{"HOST_124_154_7001", jedisPool4});
 
-        jedisList.add(new Object[]{"HOST_125_154_7001", jedisPool11});
-        jedisList.add(new Object[]{"HOST_126_154_7001", jedisPool12});
+//        jedisList.add(new Object[]{"HOST_125_154_7001", jedisPool11});
+//        jedisList.add(new Object[]{"HOST_126_154_7001", jedisPool12});
 
-//        jedisList.add(new Object[]{"HOST_121_139_7002", jedisPool5});
-//        jedisList.add(new Object[]{"HOST_122_138_7002", jedisPool6});
-//        jedisList.add(new Object[]{"HOST_123_138_7002", jedisPool7});
-//        jedisList.add(new Object[]{"HOST_124_154_7002", jedisPool8});
-//        jedisList.add(new Object[]{"HOST_125_154_7002", jedisPool9});
-//        jedisList.add(new Object[]{"HOST_126_154_7002", jedisPool10});
+        jedisList.add(new Object[]{"HOST_121_139_7002", jedisPool5});
+        jedisList.add(new Object[]{"HOST_122_138_7002", jedisPool6});
+        jedisList.add(new Object[]{"HOST_123_138_7002", jedisPool7});
+        jedisList.add(new Object[]{"HOST_124_154_7002", jedisPool8});
+        jedisList.add(new Object[]{"HOST_125_154_7002", jedisPool9});
+        jedisList.add(new Object[]{"HOST_126_154_7002", jedisPool10});
 
         ExecutorService es = Executors.newFixedThreadPool(60);
         ArrayList<Future> futures = new ArrayList<>();

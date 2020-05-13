@@ -79,8 +79,8 @@ public class RedisFlushDb {
         jedisList.add(new Object[]{"HOST_123_138_7001", jedisPool3});
         jedisList.add(new Object[]{"HOST_124_154_7001", jedisPool4});
 
-        jedisList.add(new Object[]{"HOST_125_154_7001", jedisPool11});
-        jedisList.add(new Object[]{"HOST_126_154_7001", jedisPool12});
+//        jedisList.add(new Object[]{"HOST_125_154_7001", jedisPool11});
+//        jedisList.add(new Object[]{"HOST_126_154_7001", jedisPool12});
 
         jedisList.add(new Object[]{"HOST_121_139_7002", jedisPool5});
         jedisList.add(new Object[]{"HOST_122_138_7002", jedisPool6});

@@ -37,7 +37,8 @@ public class RedisDataMoveUtil {
         config.setMaxWaitMillis(MAX_WAIT);
         config.setTestOnBorrow(TEST_ON_BORROW);
         jedisSinglePool = new JedisPool(config, "10.80.32.158", 80, TIMEOUT, "WxDCxfA8qi");
-        jedisCLusterPool = new JedisPool(config, "10.66.224.4", 6379, TIMEOUT, "6tSSAsA0T1eDjMKV");
+        jedisCLusterPool = new JedisPool(config, "10.66.224.14", 6379, TIMEOUT);
+//        jedisCLusterPool = new JedisPool(config, "10.66.224.4", 6379, TIMEOUT, "6tSSAsA0T1eDjMKV");
 //        jedisCLusterPool = new JedisPool(config, "10.90.126.154", 80, TIMEOUT, "WxDCxfA8qi");
 
         ExecutorService es = Executors.newFixedThreadPool(60);

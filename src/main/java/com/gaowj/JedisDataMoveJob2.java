@@ -33,8 +33,8 @@ public class JedisDataMoveJob2 implements Callable {
     public Object call() throws Exception {
         singleRedis = jedisSingle.getResource();
         clusterRedis = jedisCluster.getResource();
-        int[] singleDb = {-1, -1, 3, 4, 6, 7, 16, 21, 23, 24, 26, 28, 15, 10, 17};
-        for (int db = 2; db <= 13; db++) {
+        int[] singleDb = {-1, -1, 3, 4, 6, 7, 16, 21, 23, 24, 26, 28, 15, 10, 17, 25};
+        for (int db = 2; db <= 15; db++) {
             count = 0;
             Set<String> keys = null;
             try {

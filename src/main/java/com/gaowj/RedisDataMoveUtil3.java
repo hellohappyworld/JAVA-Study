@@ -34,10 +34,11 @@ public class RedisDataMoveUtil3 {
         String host1 = args[0];
         int post1 = Integer.parseInt(args[1]);
         String password1 = args[2];
-        String host2 = args[3];
-        int post2 = Integer.parseInt(args[4]);
-        String password2 = args[5];
-        int db = Integer.parseInt(args[6]);
+        int db1 = Integer.parseInt(args[3]);
+        String host2 = args[4];
+        int post2 = Integer.parseInt(args[5]);
+        String password2 = args[6];
+        int d2 = Integer.parseInt(args[7]);
 
         JedisPoolConfig config = new JedisPoolConfig();
         config.setMaxTotal(MAX_ACTIVE);
@@ -47,6 +48,6 @@ public class RedisDataMoveUtil3 {
         jedisSingle1 = new JedisPool(config, host1, post1, TIMEOUT, password1);
         jedisSingle2 = new JedisPool(config, host2, post2, TIMEOUT, password2);
         ExecutorService es = Executors.newFixedThreadPool(60);
-        es.submit(new JedisDataMoveJob3(jedisSingle1, jedisSingle2, db));
+        es.submit(new JedisDataMoveJob3(jedisSingle1, jedisSingle2, db1, d2));
     }
 }
