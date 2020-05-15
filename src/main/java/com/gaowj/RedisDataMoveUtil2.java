@@ -41,12 +41,18 @@ public class RedisDataMoveUtil2 {
     private static JedisPool jedisPool11 = null;
     private static JedisPool jedisPool12 = null;
 
-    public static final String HOST_121_139 = "10.90.121.139";
-    public static final String HOST_122_138 = "10.90.122.138";
-    public static final String HOST_123_138 = "10.90.123.138";
-    public static final String HOST_124_154 = "10.90.124.154";
-    public static final String HOST_125_154 = "10.90.125.154";
-    public static final String HOST_126_154 = "10.90.126.154";
+    //    public static final String HOST_121_139 = "10.90.121.139";
+//    public static final String HOST_122_138 = "10.90.122.138";
+//    public static final String HOST_123_138 = "10.90.123.138";
+//    public static final String HOST_124_154 = "10.90.124.154";
+//    public static final String HOST_125_154 = "10.90.125.154";
+//    public static final String HOST_126_154 = "10.90.126.154";
+    public static final String HOST_121_139 = "10.90.18.14";
+    public static final String HOST_122_138 = "10.90.18.15";
+    public static final String HOST_123_138 = "10.90.18.16";
+    public static final String HOST_124_154 = "10.90.18.17";
+    public static final String HOST_125_154 = "10.90.18.18";
+    public static final String HOST_126_154 = "10.90.18.19";
     private static int PORT7001 = 7001;
     private static int PORT7002 = 7002;
     public static String PASSWORD_7001_7002 = "ioBA6TJ3HZElEcoB";
@@ -58,8 +64,9 @@ public class RedisDataMoveUtil2 {
         config.setMaxIdle(MAX_IDLE);
         config.setMaxWaitMillis(MAX_WAIT);
         config.setTestOnBorrow(TEST_ON_BORROW);
+        jedisSinglePool = new JedisPool(config, "10.90.18.13", 6379, TIMEOUT, "WxDCxfA8qi");
 //        jedisSinglePool = new JedisPool(config, "10.80.32.158", 80, TIMEOUT, "WxDCxfA8qi");
-        jedisSinglePool = new JedisPool(config, "10.90.125.154", 80, TIMEOUT, "WxDCxfA8qi");
+//        jedisSinglePool = new JedisPool(config, "10.90.125.154", 80, TIMEOUT, "WxDCxfA8qi");
         jedisPool1 = new JedisPool(config, HOST_121_139, PORT7001, TIMEOUT, PASSWORD_7001_7002);
         jedisPool2 = new JedisPool(config, HOST_122_138, PORT7001, TIMEOUT, PASSWORD_7001_7002);
         jedisPool3 = new JedisPool(config, HOST_123_138, PORT7001, TIMEOUT, PASSWORD_7001_7002);
