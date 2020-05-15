@@ -62,7 +62,6 @@ public class RedisPool {
     private static JedisPool jedisPool126_7002 = null;
 
 
-
     /**
      * 初始化Redis连接池
      */
@@ -107,7 +106,7 @@ public class RedisPool {
 
     public static Jedis getJedis121_7001(int db) {
         try {
-            if (jedisPool121_7001 != null){
+            if (jedisPool121_7001 != null) {
                 Jedis jedis = jedisPool121_7001.getResource();
                 jedis.select(db);
                 return jedis;
@@ -120,7 +119,7 @@ public class RedisPool {
 
     public static Jedis getJedis122_7001(int db) {
         try {
-            if (jedisPool122_7001 != null){
+            if (jedisPool122_7001 != null) {
                 Jedis jedis = jedisPool122_7001.getResource();
                 jedis.select(db);
                 return jedis;
@@ -133,7 +132,7 @@ public class RedisPool {
 
     public static Jedis getJedis123_7001(int db) {
         try {
-            if (jedisPool123_7001 != null){
+            if (jedisPool123_7001 != null) {
                 Jedis jedis = jedisPool123_7001.getResource();
                 jedis.select(db);
                 return jedis;
@@ -146,7 +145,7 @@ public class RedisPool {
 
     public static Jedis getJedis124_7001(int db) {
         try {
-            if (jedisPool124_7001 != null){
+            if (jedisPool124_7001 != null) {
                 Jedis jedis = jedisPool124_7001.getResource();
                 jedis.select(db);
                 return jedis;
@@ -159,7 +158,7 @@ public class RedisPool {
 
     public static Jedis getJedis125_7001(int db) {
         try {
-            if (jedisPool125_7001 != null){
+            if (jedisPool125_7001 != null) {
                 Jedis jedis = jedisPool125_7001.getResource();
                 jedis.select(db);
                 return jedis;
@@ -172,7 +171,7 @@ public class RedisPool {
 
     public static Jedis getJedis126_7001(int db) {
         try {
-            if (jedisPool126_7001 != null){
+            if (jedisPool126_7001 != null) {
                 Jedis jedis = jedisPool126_7001.getResource();
                 jedis.select(db);
                 return jedis;
@@ -185,7 +184,7 @@ public class RedisPool {
 
     public static Jedis getJedis121_7002(int db) {
         try {
-            if (jedisPool121_7002 != null){
+            if (jedisPool121_7002 != null) {
                 Jedis jedis = jedisPool121_7002.getResource();
                 jedis.select(db);
                 return jedis;
@@ -198,7 +197,7 @@ public class RedisPool {
 
     public static Jedis getJedis122_7002(int db) {
         try {
-            if (jedisPool122_7002 != null){
+            if (jedisPool122_7002 != null) {
                 Jedis jedis = jedisPool122_7002.getResource();
                 jedis.select(db);
                 return jedis;
@@ -211,7 +210,7 @@ public class RedisPool {
 
     public static Jedis getJedis123_7002(int db) {
         try {
-            if (jedisPool123_7002 != null){
+            if (jedisPool123_7002 != null) {
                 Jedis jedis = jedisPool123_7002.getResource();
                 jedis.select(db);
                 return jedis;
@@ -224,7 +223,7 @@ public class RedisPool {
 
     public static Jedis getJedis124_7002(int db) {
         try {
-            if (jedisPool124_7002 != null){
+            if (jedisPool124_7002 != null) {
                 Jedis jedis = jedisPool124_7002.getResource();
                 jedis.select(db);
                 return jedis;
@@ -237,7 +236,7 @@ public class RedisPool {
 
     public static Jedis getJedis125_7002(int db) {
         try {
-            if (jedisPool125_7002 != null){
+            if (jedisPool125_7002 != null) {
                 Jedis jedis = jedisPool125_7002.getResource();
                 jedis.select(db);
                 return jedis;
@@ -250,7 +249,7 @@ public class RedisPool {
 
     public static Jedis getJedis126_7002(int db) {
         try {
-            if (jedisPool126_7002 != null){
+            if (jedisPool126_7002 != null) {
                 Jedis jedis = jedisPool126_7002.getResource();
                 jedis.select(db);
                 return jedis;

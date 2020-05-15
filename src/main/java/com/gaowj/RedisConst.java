@@ -6,27 +6,39 @@ package com.gaowj;
  * redis常量
  */
 public final class RedisConst {
-    //    public static final String HOST11 = "10.90.18.11";
-    public static final String HOST11 = "10.90.124.154";
-    //    public static final String HOST12 = "10.90.18.12";
-    public static final String HOST12 = "10.90.125.154";
+    public static final String HOST11 = "10.90.18.11";
+    //    public static final String HOST11 = "10.90.124.154";
+    public static final String HOST12 = "10.90.18.12";
+    //    public static final String HOST12 = "10.90.125.154";
     public static final String HOST13 = "10.90.18.13";
     //    public static final String HOST13 = "10.80.32.158";
     public static final int PORT = 6379;
     //    public static final int PORT = 80;
     public static final String PASSWORD = "WxDCxfA8qi";
 
-    public static final String HOST_121_139 = "10.90.121.139";
-    public static final String HOST_122_138 = "10.90.122.138";
-    public static final String HOST_123_138 = "10.90.123.138";
-    public static final String HOST_124_154 = "10.90.124.154";
-    public static final String HOST_125_154 = "10.90.125.154";
-    public static final String HOST_126_154 = "10.90.126.154";
+//    public static final String HOST_121_139 = "10.90.121.139";
+//    public static final String HOST_122_138 = "10.90.122.138";
+//    public static final String HOST_123_138 = "10.90.123.138";
+//    public static final String HOST_124_154 = "10.90.124.154";
+//    public static final String HOST_125_154 = "10.90.125.154";
+//    public static final String HOST_126_154 = "10.90.126.154";
+
+    public static final String HOST_121_139 = "10.90.18.14";
+    public static final String HOST_122_138 = "10.90.18.15";
+    public static final String HOST_123_138 = "10.90.18.16";
+    public static final String HOST_124_154 = "10.90.18.17";
+    public static final String HOST_125_154 = "10.90.18.18";
+    public static final String HOST_126_154 = "10.90.18.19";
     public static final int PORT_7001 = 7001;
     public static final int PORT_7002 = 7002;
     public static final int PORT_7003 = 7003;
     public static final int PORT_7004 = 7004;
-    public static final String CLUSTER_PASSWORD = "aWmPbGRXFvsuZKwS";
+    public static final int PORT_7005 = 7005;
+    //    public static final String CLUSTER_PASSWORD = "aWmPbGRXFvsuZKwS";
+    public static final String CLUSTER_PASSWORD = "ioBA6TJ3HZElEcoB";
+    /**
+     * host 121~126的7001，7002,7004,7005的redis密码都是这个
+     */
     public static final String PASSWORD_7001_7002 = "ioBA6TJ3HZElEcoB";
     public static final int DB_1 = 1;
     public static final int DB_2 = 2;
@@ -40,6 +52,10 @@ public final class RedisConst {
     public static final int DB_10 = 10;
     public static final int DB_11 = 11;
     public static final int DB_12 = 12;
+    public static final int DB_13 = 13;
+    public static final int DB_14 = 14;
+    public static final int DB_15 = 15;
+    public static final int DB_16 = 16;
 
 
     /*public static final HashMap<String, String> REDISCLUSTER;
