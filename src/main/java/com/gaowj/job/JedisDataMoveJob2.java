@@ -1,4 +1,4 @@
-package com.gaowj;
+package com.gaowj.job;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;

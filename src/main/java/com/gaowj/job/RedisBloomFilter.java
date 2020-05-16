@@ -1,5 +1,6 @@
-package com.gaowj;
+package com.gaowj.job;
 
+import com.gaowj.utils.RedisUtil;
 import io.rebloom.client.Command;
 import redis.clients.jedis.Client;
 import redis.clients.jedis.Connection;

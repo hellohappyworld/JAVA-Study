@@ -1,8 +1,7 @@
-package com.gaowj;
+package com.gaowj.job;
 
+import com.gaowj.utils.JedisClusterUtil;
 import redis.clients.jedis.*;
-
-import java.util.*;
 
 public class RedisKeysCount {
     public static void main(String[] args) {

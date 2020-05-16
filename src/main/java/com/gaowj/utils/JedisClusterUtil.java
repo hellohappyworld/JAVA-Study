@@ -1,5 +1,6 @@
-package com.gaowj;
+package com.gaowj.utils;
 
+import com.gaowj.common.RedisConst;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

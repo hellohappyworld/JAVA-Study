@@ -1,9 +1,11 @@
-package com.gaowj;
+package com.gaowj.job;
 
+import com.gaowj.utils.JedisClusterUtil;
+import com.gaowj.utils.RedisPool;
 import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.ScanParams;
 import redis.clients.jedis.ScanResult;
+import redis.clients.jedis.ShardedJedis;
 
 import java.util.*;
 import java.util.concurrent.Callable;
@@ -13,19 +15,20 @@ import java.util.concurrent.Callable;
  * created on 2020-05-15.
  * function:
  */
-public class JedisDataMoveJob4 implements Callable {
+public class ShardingDataMoveJob implements Callable {
     private Jedis singleJedis = null;
+    private ShardedJedis shardedJedis = null;
     private int singleDb = 0;
-    private int shardingDb = 0;
     private int count = 0;
 
-    public JedisDataMoveJob4(int singleDb, int shardingDb) {
+
+    public ShardingDataMoveJob(int singleDb) {
         this.singleDb = singleDb;
-        this.shardingDb = shardingDb;
     }
 
     @Override
     public Object call() throws Exception {
+        shardedJedis = JedisClusterUtil.getFilteShardedJedis();
         singleJedis = RedisPool.getJedisPool13();
         singleJedis.select(singleDb);
 
@@ -42,61 +45,61 @@ public class JedisDataMoveJob4 implements Callable {
         } while (!cursorLocal.equals(String.valueOf(0)));
 
         Iterator<String> keyIter = keysLocal.iterator();
-
         while (keyIter.hasNext()) {
             String key = keyIter.next();
             String type = singleJedis.type(key);
-            Jedis userJedis = RedisUtil.getUserJedis(key, shardingDb);
             try {
                 switch (type) {
                     case "list":
-                        listMove(userJedis, key);
+                        listMove(key);
                         break;
                     case "string":
-                        StringMove(userJedis, key);
+                        StringMove(key);
                         break;
                     case "hash":
-                        hashMove(userJedis, key);
+                        hashMove(key);
                         break;
                     case "set":
-                        setMove(userJedis, key);
+                        setMove(key);
                         break;
                 }
                 int ttl = singleJedis.ttl(key).intValue();
-                userJedis.expire(key, ttl);
+                if (-1 != ttl)
+                    shardedJedis.expire(key, ttl);
             } catch (Exception e) {
                 e.printStackTrace();
-            } finally {
-                userJedis.close();
             }
         }
 
+        shardedJedis.close();
         singleJedis.close();
-        System.out.println(" the single db is " + String.valueOf(singleDb) + ", the single count is " + String.valueOf(keysLocal.size()) + " ,the sharding db is " + String.valueOf(shardingDb) + " ,the sharding count is " + String.valueOf(count));
+        System.out.println(" the from db is " + singleDb + ", the from count is " + String.valueOf(keysLocal.size()) + " ,the to count is " + String.valueOf(count));
         return null;
     }
 
-    private void setMove(Jedis userJedis, String key) {
+    private void setMove(String key) {
         Set<String> smembers = singleJedis.smembers(key);
-        userJedis.sadd(key, smembers.toArray(new String[smembers.size()]));
+        shardedJedis.sadd(key, smembers.toArray(new String[smembers.size()]));
         count++;
     }
 
-    private void hashMove(Jedis userJedis, String key) {
+    private void hashMove(String key) {
         Map<String, String> map = singleJedis.hgetAll(key);
-        userJedis.hmset(key, map);
+        shardedJedis.hmset(key, map);
         count++;
     }
 
-    private void StringMove(Jedis userJedis, String key) {
+    private void StringMove(String key) {
         String v = singleJedis.get(key);
-        userJedis.setnx(key, v);
+        shardedJedis.set(key, v);
         count++;
     }
 
-    private void listMove(Jedis userJedis, String key) {
+    private void listMove(String key) {
         List<String> lrange = singleJedis.lrange(key, 0, -1);
-        userJedis.lpush(key, lrange.toArray(new String[lrange.size()]));
+        if (shardedJedis.exists(key))
+            shardedJedis.del(key);
+        shardedJedis.lpush(key, lrange.toArray(new String[lrange.size()]));
         count++;
     }
 }

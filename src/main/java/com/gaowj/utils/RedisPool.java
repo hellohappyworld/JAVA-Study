@@ -1,5 +1,6 @@
-package com.gaowj;
+package com.gaowj.utils;
 
+import com.gaowj.common.RedisConst;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;

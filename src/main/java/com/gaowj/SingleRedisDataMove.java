@@ -1,7 +1,8 @@
 package com.gaowj;
 
+import com.gaowj.job.SingleRedisDataMoveJob;
+import com.gaowj.utils.RedisPool;
 import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -17,7 +18,7 @@ import java.util.concurrent.Executors;
  * created on 2020-05-15.
  * function:
  */
-public class RedisDataMoveUtil5 {
+public class SingleRedisDataMove {
     public static void main(String[] args) {
         String filePath = args[0];
         List<String> list = new ArrayList<String>();
@@ -71,7 +72,7 @@ public class RedisDataMoveUtil5 {
                         break;
                 }
 
-                es.submit(new JedisDataMoveJob5(fromJedis, fromDb, toJedis, toDb));
+                es.submit(new SingleRedisDataMoveJob(fromJedis, fromDb, toJedis, toDb));
             }
 
         } catch (Exception e) {

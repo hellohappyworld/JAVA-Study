@@ -1,4 +1,4 @@
-package com.gaowj;
+package com.gaowj.job;
 
 import com.google.common.hash.Funnel;
 import com.google.common.hash.Funnels;

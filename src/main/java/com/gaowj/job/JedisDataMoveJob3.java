@@ -1,29 +1,38 @@
-package com.gaowj;
+package com.gaowj.job;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.Callable;
-import java.util.concurrent.Executors;
 
 /**
  * created by gaowj.
  * created on 2020-04-20.
  * function:
  */
-public class JedisDataMoveJob implements Callable {
+public class JedisDataMoveJob3 implements Callable {
+
+    private final Logger logger = LoggerFactory.getLogger(JedisDataMoveJob3.class);
+
     private JedisPool jedisSingle = null;
     private JedisPool jedisCluster = null;
     private Jedis singleRedis = null;
     private Jedis clusterRedis = null;
-    private int db = 0;
+    private int db1 = -1;
+    private int db2 = -1;
     private int count = 0;
 
-    public JedisDataMoveJob(JedisPool jedisSingle, JedisPool jedisCluster, int db) {
+    public JedisDataMoveJob3(JedisPool jedisSingle, JedisPool jedisCluster, int db1, int db2) {
         this.jedisSingle = jedisSingle;
         this.jedisCluster = jedisCluster;
-        this.db = db;
+        this.db1 = db1;
+        this.db2 = db2;
     }
 
     @Override
@@ -32,8 +41,9 @@ public class JedisDataMoveJob implements Callable {
         try {
             singleRedis = jedisSingle.getResource();
             clusterRedis = jedisCluster.getResource();
-            singleRedis.select(db);
-            clusterRedis.select(db);
+            singleRedis.select(db1);
+            clusterRedis.select(db2);
+            clusterRedis.flushDB();
 
             keys = singleRedis.keys("*");
             Iterator<String> keyIter = keys.iterator();
@@ -70,8 +80,8 @@ public class JedisDataMoveJob implements Callable {
             singleRedis.close();
             clusterRedis.close();
         }
-
-        return "the db is " + String.valueOf(db) + ", the single count is " + String.valueOf(keys.size()) + ", the cluster count is " + String.valueOf(count);
+        System.out.println("the db is " + String.valueOf(db1) + ", the single count is " + String.valueOf(keys.size()) + ", the cluster count is " + String.valueOf(count));
+        return null;
     }
 
     private void setMove(String key) {

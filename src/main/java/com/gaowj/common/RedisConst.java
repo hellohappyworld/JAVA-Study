@@ -1,4 +1,4 @@
-package com.gaowj;
+package com.gaowj.common;
 
 /**
  * gaowj

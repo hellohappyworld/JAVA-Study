@@ -1,4 +1,4 @@
-package com.gaowj;
+package com.gaowj.job;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.ScanParams;
@@ -12,7 +12,7 @@ import java.util.concurrent.Callable;
  * created on 2020-05-15.
  * function:
  */
-public class JedisDataMoveJob5 implements Callable {
+public class SingleRedisDataMoveJob implements Callable {
     private Jedis fromJedis = null;
     private Jedis toJedis = null;
     private String fromDb = null;
@@ -20,7 +20,7 @@ public class JedisDataMoveJob5 implements Callable {
     private int count = 0;
 
 
-    public JedisDataMoveJob5(Jedis fromJedis, String fromDb, Jedis toJedis, String toDb) {
+    public SingleRedisDataMoveJob(Jedis fromJedis, String fromDb, Jedis toJedis, String toDb) {
         this.fromJedis = fromJedis;
         this.toJedis = toJedis;
         this.fromDb = fromDb;
@@ -42,7 +42,6 @@ public class JedisDataMoveJob5 implements Callable {
         } while (!cursorLocal.equals(String.valueOf(0)));
 
         Iterator<String> keyIter = keysLocal.iterator();
-
         while (keyIter.hasNext()) {
             String key = keyIter.next();
             String type = fromJedis.type(key);
@@ -62,7 +61,8 @@ public class JedisDataMoveJob5 implements Callable {
                         break;
                 }
                 int ttl = fromJedis.ttl(key).intValue();
-                toJedis.expire(key, ttl);
+                if (-1 != ttl)
+                    toJedis.expire(key, ttl);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -88,12 +88,14 @@ public class JedisDataMoveJob5 implements Callable {
 
     private void StringMove(String key) {
         String v = fromJedis.get(key);
-        toJedis.setnx(key, v);
+        toJedis.set(key, v);
         count++;
     }
 
     private void listMove(String key) {
         List<String> lrange = fromJedis.lrange(key, 0, -1);
+        if (toJedis.exists(key))
+            toJedis.del(key);
         toJedis.lpush(key, lrange.toArray(new String[lrange.size()]));
         count++;
     }
