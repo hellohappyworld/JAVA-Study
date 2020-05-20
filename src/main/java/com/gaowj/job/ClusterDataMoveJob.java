@@ -95,7 +95,7 @@ public class ClusterDataMoveJob implements Callable {
         List<String> lrange = singleJedis.lrange(key, 0, -1);
         if (jedisCluster.exists(key))
             jedisCluster.del(key);
-        jedisCluster.lpush(key, lrange.toArray(new String[lrange.size()]));
+        jedisCluster.rpush(key, lrange.toArray(new String[lrange.size()]));
         count++;
     }
 }

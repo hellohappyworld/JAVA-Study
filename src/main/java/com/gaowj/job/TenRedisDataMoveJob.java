@@ -2,6 +2,8 @@ package com.gaowj.job;
 
 import com.gaowj.utils.RedisPool;
 import com.gaowj.utils.RedisUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.ScanParams;
 import redis.clients.jedis.ScanResult;
@@ -15,6 +17,7 @@ import java.util.concurrent.Callable;
  * function:
  */
 public class TenRedisDataMoveJob implements Callable {
+    private final Logger logger = LoggerFactory.getLogger(TenRedisDataMoveJob.class);
     private Jedis singleJedis = null;
     private int singleDb = 0;
     private int shardingDb = 0;
@@ -46,6 +49,7 @@ public class TenRedisDataMoveJob implements Callable {
 
         while (keyIter.hasNext()) {
             String key = keyIter.next();
+            System.out.println("--------------key--------->" + key);
             String type = singleJedis.type(key);
             Jedis userJedis = RedisUtil.getUserJedis(key, shardingDb);
             try {
@@ -81,18 +85,21 @@ public class TenRedisDataMoveJob implements Callable {
     private void setMove(Jedis userJedis, String key) {
         Set<String> smembers = singleJedis.smembers(key);
         userJedis.sadd(key, smembers.toArray(new String[smembers.size()]));
+//        System.out.println("--------set------key--------->" + key);
         count++;
     }
 
     private void hashMove(Jedis userJedis, String key) {
         Map<String, String> map = singleJedis.hgetAll(key);
         userJedis.hmset(key, map);
+//        System.out.println("----------hash----key--------->" + key);
         count++;
     }
 
     private void StringMove(Jedis userJedis, String key) {
         String v = singleJedis.get(key);
         userJedis.set(key, v);
+//        System.out.println("------------set--key--------->" + key);
         count++;
     }
 
@@ -100,7 +107,8 @@ public class TenRedisDataMoveJob implements Callable {
         List<String> lrange = singleJedis.lrange(key, 0, -1);
         if (userJedis.exists(key))
             userJedis.del(key);
-        userJedis.lpush(key, lrange.toArray(new String[lrange.size()]));
+        userJedis.rpush(key, lrange.toArray(new String[lrange.size()]));
+//        System.out.println("-------------list-key--------->" + key);
         count++;
     }
 }

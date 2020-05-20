@@ -9,23 +9,6 @@ import redis.clients.jedis.JedisPoolConfig;
 
 public class RedisPool {
     private static final Logger logger = LoggerFactory.getLogger(RedisPool.class);
-    //服务器IP地址
-    private static String ADDR = "10.90.18.16";
-    //抓取文章列表
-    private static String ADDR_GRA_DATA = "10.90.7.183";
-
-    //抓取文章列表
-    private static String ADDR_GRA_REC = "10.90.18.13";
-    //保存非实时数据
-    private static String ADDR_GRA_NOT_RT = "10.90.18.11";
-    private static String ADDR_GRA_REC_SUPPORT = "10.90.18.12";
-    //抓取文章列表
-    private static String ADDR_GRA_REC_TEST = "10.80.27.158";
-    //端口
-    private static int PORT = 6379;
-    //密码
-    private static String AUTH = "password";
-    private static String GRA_REC_AUTH = "WxDCxfA8qi";
     //连接实例的最大连接数
     private static int MAX_ACTIVE = 30000;
     //控制一个pool最多有多少个状态为idle(空闲的)的jedis实例，默认值也是8。
@@ -74,12 +57,6 @@ public class RedisPool {
             config.setMaxIdle(MAX_IDLE);
             config.setMaxWaitMillis(MAX_WAIT);
             config.setTestOnBorrow(TEST_ON_BORROW);
-            jedisPool = new JedisPool(config, ADDR, PORT, TIMEOUT);
-            jedisPoolGra = new JedisPool(config, ADDR_GRA_DATA, PORT, TIMEOUT, AUTH, 6);
-            jedisPoolGraRec = new JedisPool(config, ADDR_GRA_REC, PORT, TIMEOUT, GRA_REC_AUTH, 0);
-            jedisPoolGraNotRt = new JedisPool(config, ADDR_GRA_NOT_RT, PORT, TIMEOUT, GRA_REC_AUTH, 0);
-            jedisPoolGraRecTest = new JedisPool(config, ADDR_GRA_REC_TEST, PORT, TIMEOUT, AUTH, 10);
-            jedisPoolGraRecSupport = new JedisPool(config, ADDR_GRA_REC_SUPPORT, PORT, TIMEOUT, GRA_REC_AUTH, 0);
 
             jedisPool11 = new JedisPool(config, RedisConst.HOST11, RedisConst.PORT, TIMEOUT, RedisConst.PASSWORD);
             jedisPool12 = new JedisPool(config, RedisConst.HOST12, RedisConst.PORT, TIMEOUT, RedisConst.PASSWORD);

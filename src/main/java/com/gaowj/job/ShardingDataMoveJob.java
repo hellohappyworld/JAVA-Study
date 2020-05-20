@@ -99,7 +99,7 @@ public class ShardingDataMoveJob implements Callable {
         List<String> lrange = singleJedis.lrange(key, 0, -1);
         if (shardedJedis.exists(key))
             shardedJedis.del(key);
-        shardedJedis.lpush(key, lrange.toArray(new String[lrange.size()]));
+        shardedJedis.rpush(key, lrange.toArray(new String[lrange.size()]));
         count++;
     }
 }

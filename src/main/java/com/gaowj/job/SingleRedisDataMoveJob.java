@@ -96,7 +96,7 @@ public class SingleRedisDataMoveJob implements Callable {
         List<String> lrange = fromJedis.lrange(key, 0, -1);
         if (toJedis.exists(key))
             toJedis.del(key);
-        toJedis.lpush(key, lrange.toArray(new String[lrange.size()]));
+        toJedis.rpush(key, lrange.toArray(new String[lrange.size()]));
         count++;
     }
 }
