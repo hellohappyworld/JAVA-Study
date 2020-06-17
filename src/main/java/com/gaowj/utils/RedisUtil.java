@@ -50,6 +50,9 @@ public class RedisUtil {
             default:
                 break;
         }
+
+        System.out.println("redis is " + nUser);
+
         return jedis;
     }
 
@@ -98,5 +101,16 @@ public class RedisUtil {
             RedisPool.returnResource(jedis);
         }
 
+    }
+
+    public static void main(String[] args) {
+        CRC32 crc32 = new CRC32();
+        crc32.update("debugclod123".getBytes());
+        System.out.println("crc32.getValue()---->" + crc32.getValue());
+        System.out.println("(int) crc32.getValue()--->" + (int) crc32.getValue());
+        System.out.println("(int) crc32.getValue() % 10-->" + (int) crc32.getValue() % 10);
+        System.out.println("Math.abs((int) crc32.getValue() % 10)-->" + Math.abs((int) crc32.getValue() % 10));
+        int nUser = Math.abs((int) crc32.getValue() % 10);
+        System.out.println(nUser);
     }
 }

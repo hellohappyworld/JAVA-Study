@@ -13,21 +13,21 @@ import java.util.List;
 /**
  * created by gaowj.
  * created on 2020-06-02.
- * function:
+ * function: 用户使用的布隆库清库处理
  */
 public class UserRedisFlushDb {
     public static void main(String[] args) {
         int db = Integer.parseInt(args[0]);
-        Jedis jedis121_7002 = RedisPool.getJedis121_7002(db);
-        Jedis jedis122_7002 = RedisPool.getJedis122_7002(db);
-        Jedis jedis123_7002 = RedisPool.getJedis123_7002(db);
-        Jedis jedis124_7002 = RedisPool.getJedis124_7002(db);
-        Jedis jedis125_7002 = RedisPool.getJedis125_7002(db);
-        Jedis jedis126_7002 = RedisPool.getJedis126_7002(db);
-        Jedis jedis121_7001 = RedisPool.getJedis121_7001(db);
-        Jedis jedis122_7001 = RedisPool.getJedis122_7001(db);
-        Jedis jedis123_7001 = RedisPool.getJedis123_7001(db);
-        Jedis jedis124_7001 = RedisPool.getJedis124_7001(db);
+        Jedis jedis121_7002 = RedisPool.getJedis121_7002(db);  //10.90.18.14 7002
+        Jedis jedis122_7002 = RedisPool.getJedis122_7002(db);  //10.90.18.15 7002
+        Jedis jedis123_7002 = RedisPool.getJedis123_7002(db);  //10.90.18.16 7002
+        Jedis jedis124_7002 = RedisPool.getJedis124_7002(db);  //10.90.18.17 7002
+        Jedis jedis125_7002 = RedisPool.getJedis125_7002(db);  //10.90.18.18 7002
+        Jedis jedis126_7002 = RedisPool.getJedis126_7002(db);  //10.90.18.19 7002
+        Jedis jedis121_7001 = RedisPool.getJedis121_7001(db);  //10.90.18.14 7001
+        Jedis jedis122_7001 = RedisPool.getJedis122_7001(db);  //10.90.18.15 7001
+        Jedis jedis123_7001 = RedisPool.getJedis123_7001(db);  //10.90.18.16 7001
+        Jedis jedis124_7001 = RedisPool.getJedis124_7001(db);  //10.90.18.17 7001
         HashMap<String, Jedis> map = new HashMap<>();
         map.put("jedis121_7002", jedis121_7002);
         map.put("jedis122_7002", jedis122_7002);
