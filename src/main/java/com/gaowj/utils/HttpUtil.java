@@ -192,13 +192,14 @@ public class HttpUtil {
                     .build();
             HttpPost post = new HttpPost(url);
             post.setConfig(requestConfig);
-            post.setHeader("Content-Type", "application/x-www-form-urlencoded");
+            post.setHeader("Content-Type", "application/json");
+//            post.setHeader("Content-Type", "application/x-www-form-urlencoded");
 //            post.setHeader("Content-Type","text/xml;charset=utf-8");
             StringEntity postingString = new StringEntity(requestParams, "utf-8");
             post.setEntity(postingString);
             HttpResponse response = httpClient.execute(post);
             String content = EntityUtils.toString(response.getEntity());
-            System.out.println(content);
+//            System.out.println(content);
             return content;
         } catch (SocketTimeoutException e) {
             logger.error("调用Dat+"
@@ -314,9 +315,11 @@ public class HttpUtil {
 
 
     public static void main(String[] args) {
-        String video = "1582948";
-        String url = "http://local.shank.ifengidc.com/shankinterf/get/getWemediaListByPage/" + video + "-video/json?tarsset=slave";
-        String s = HttpUtil.doGet(url);
+//        String url = "http://local.datacenter.ifengidc.com/local/monitor/kafkaLagMonitor?cluster=PublicKafkaCluster&groupID=kafka_coldboot_202006232050";
+//        String s = HttpUtil.doGet(url);
+//        System.out.println(s);
+        String message = "{\"msgGroup\": \"MANGROUP\",\"title\": \"" + "测试测试" + "\",\"content\": \"" + "测试测试" + "\",\"account\": \"gaowj\",\"url\": \"http://local.datacenter.ifengidc.com/local/sendWechatMsg\"}";
+        String s = HttpUtil.doPost2("http://local.datacenter.ifengidc.com/local/sendWechatMsg", message);
         System.out.println(s);
     }
 
