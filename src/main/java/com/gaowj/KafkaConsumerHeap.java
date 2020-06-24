@@ -36,10 +36,18 @@ public class KafkaConsumerHeap {
     }
 
     public static void main(String[] args) {
+        //新闻正反馈
         String recentUserArticleKafkaGroupId = args[0];
         int recentUserArticleAlarmLag = Integer.parseInt(args[1]);
+        //新闻临近试探
         String recentGroupTentativeKafkaGroupId = args[2];
         int recentGroupTentativeAlarmLag = Integer.parseInt(args[3]);
+        //视频正反馈
+        String videoRecentUserArticleKafkaGroupId = args[4];
+        int videoRecentUserArticleAlarmLag = Integer.parseInt(args[5]);
+        //视频临近试探
+        String videoRecentGroupTentativeKafkaGroupId = args[6];
+        int videoRecentGroupTentativeAlarmLag = Integer.parseInt(args[7]);
 
         //新闻正反馈
         String recentUserArticle = HttpUtil.doGet(Constant.KAFKA_SUM_LAG + recentUserArticleKafkaGroupId);
@@ -51,5 +59,15 @@ public class KafkaConsumerHeap {
         int recentGroupTentativeSumLag = KafkaConsumerHeap.getSumLag(recentGroupTentative);
         String recentGroupTentativeMessage = KafkaConsumerHeap.sendMessage(recentGroupTentativeSumLag, recentGroupTentativeAlarmLag, "新闻临近试探kafka消息堆积,topic:newsapp_coldboot,groupId:" + recentGroupTentativeKafkaGroupId);
         System.out.println("新闻临近试探(recentGroupTentativeSumLag)-->" + recentGroupTentativeSumLag + " 监控返回值:" + recentGroupTentativeMessage);
+        //视频正反馈
+        String videoRecentUserArticle = HttpUtil.doGet(Constant.KAFKA_SUM_LAG + videoRecentUserArticleKafkaGroupId);
+        int videoRecentUserArticleSumLag = KafkaConsumerHeap.getSumLag(videoRecentUserArticle);
+        String videoRecentUserArticleMessage = KafkaConsumerHeap.sendMessage(videoRecentUserArticleSumLag, videoRecentUserArticleAlarmLag, "视频正反馈kafka消息堆积,topic:app_vapp_ex,groupId:" + videoRecentUserArticleKafkaGroupId);
+        System.out.println("视频正反馈(videoRecentUserArticleSumLag)-->" + videoRecentUserArticleSumLag + " 监控返回值:" + videoRecentUserArticleMessage);
+        //视频临近试探
+        String videoRecentGroupTentative = HttpUtil.doGet(Constant.KAFKA_SUM_LAG + videoRecentGroupTentativeKafkaGroupId);
+        int videoRecentGroupTentativeSumLag = KafkaConsumerHeap.getSumLag(videoRecentGroupTentative);
+        String videoRecentGroupTentativeMessage = KafkaConsumerHeap.sendMessage(videoRecentGroupTentativeSumLag, videoRecentGroupTentativeAlarmLag, "视频临近试探kafka消息堆积,topic:vapp_coldboot,groupId:" + videoRecentGroupTentativeKafkaGroupId);
+        System.out.println("视频临近试探(videoRecentGroupTentativeSumLag)-->" + videoRecentGroupTentativeSumLag + " 监控返回值:" + videoRecentGroupTentativeMessage);
     }
 }
