@@ -29,16 +29,16 @@ public class UserRedisFlushDb {
         Jedis jedis123_7001 = RedisPool.getJedis123_7001(db);  //10.90.18.16 7001
         Jedis jedis124_7001 = RedisPool.getJedis124_7001(db);  //10.90.18.17 7001
         HashMap<String, Jedis> map = new HashMap<>();
-        map.put("jedis121_7002", jedis121_7002);
-        map.put("jedis122_7002", jedis122_7002);
-        map.put("jedis123_7002", jedis123_7002);
-        map.put("jedis124_7002", jedis124_7002);
-        map.put("jedis125_7002", jedis125_7002);
-        map.put("jedis126_7002", jedis126_7002);
-        map.put("jedis121_7001", jedis121_7001);
-        map.put("jedis122_7001", jedis122_7001);
-        map.put("jedis123_7001", jedis123_7001);
-        map.put("jedis124_7001", jedis124_7001);
+        map.put("10.90.18.14 7002", jedis121_7002);
+        map.put("10.90.18.15 7002", jedis122_7002);
+        map.put("10.90.18.16 7002", jedis123_7002);
+        map.put("10.90.18.17 7002", jedis124_7002);
+        map.put("10.90.18.18 7002", jedis125_7002);
+        map.put("10.90.18.19 7002", jedis126_7002);
+        map.put("10.90.18.14 7001", jedis121_7001);
+        map.put("10.90.18.15 7001", jedis122_7001);
+        map.put("10.90.18.16 7001", jedis123_7001);
+        map.put("10.90.18.17 7001", jedis124_7001);
 
         Iterator<String> iterator = map.keySet().iterator();
         while (iterator.hasNext()) {
