@@ -37,9 +37,10 @@ public class KafkaConsumerHeap {
 
     public static void main(String[] args) {
         //新闻正反馈
-        String recentUserArticleKafkaGroupId = args[0];
-        int recentUserArticleAlarmLag = Integer.parseInt(args[1]);
-        //新闻临近试探
+        String projectName = args[0];
+        String recentUserArticleKafkaGroupId = args[1];  // 消费者组
+        int recentUserArticleAlarmLag = Integer.parseInt(args[2]); //期望最大堆积值
+        /*//新闻临近试探
         String recentGroupTentativeKafkaGroupId = args[2];
         int recentGroupTentativeAlarmLag = Integer.parseInt(args[3]);
         //视频正反馈
@@ -47,14 +48,15 @@ public class KafkaConsumerHeap {
         int videoRecentUserArticleAlarmLag = Integer.parseInt(args[5]);
         //视频临近试探
         String videoRecentGroupTentativeKafkaGroupId = args[6];
-        int videoRecentGroupTentativeAlarmLag = Integer.parseInt(args[7]);
+        int videoRecentGroupTentativeAlarmLag = Integer.parseInt(args[7]);*/
 
         //新闻正反馈
         String recentUserArticle = HttpUtil.doGet(Constant.KAFKA_SUM_LAG + recentUserArticleKafkaGroupId);
         int recentUserArticleSumLag = KafkaConsumerHeap.getSumLag(recentUserArticle);
-        String recentUserArticleMessage = KafkaConsumerHeap.sendMessage(recentUserArticleSumLag, recentUserArticleAlarmLag, "新闻正反馈kafka消息堆积,topic:app_newsapp,groupId:" + recentUserArticleKafkaGroupId);
-        System.out.println("新闻正反馈(recentUserArticleSumLag)-->" + recentUserArticleSumLag + " 监控返回值:" + recentUserArticleMessage);
-        //新闻临近试探
+        String message = projectName + "kafka消息堆积,groupId:";
+        String recentUserArticleMessage = KafkaConsumerHeap.sendMessage(recentUserArticleSumLag, recentUserArticleAlarmLag, message + recentUserArticleKafkaGroupId);
+        System.out.println(projectName + "堆积值(sumLag)-->" + recentUserArticleSumLag + " 监控返回值:" + recentUserArticleMessage);
+        /*//新闻临近试探
         String recentGroupTentative = HttpUtil.doGet(Constant.KAFKA_SUM_LAG + recentGroupTentativeKafkaGroupId);
         int recentGroupTentativeSumLag = KafkaConsumerHeap.getSumLag(recentGroupTentative);
         String recentGroupTentativeMessage = KafkaConsumerHeap.sendMessage(recentGroupTentativeSumLag, recentGroupTentativeAlarmLag, "新闻临近试探kafka消息堆积,topic:newsapp_coldboot,groupId:" + recentGroupTentativeKafkaGroupId);
@@ -68,6 +70,6 @@ public class KafkaConsumerHeap {
         String videoRecentGroupTentative = HttpUtil.doGet(Constant.KAFKA_SUM_LAG + videoRecentGroupTentativeKafkaGroupId);
         int videoRecentGroupTentativeSumLag = KafkaConsumerHeap.getSumLag(videoRecentGroupTentative);
         String videoRecentGroupTentativeMessage = KafkaConsumerHeap.sendMessage(videoRecentGroupTentativeSumLag, videoRecentGroupTentativeAlarmLag, "视频临近试探kafka消息堆积,topic:vapp_coldboot,groupId:" + videoRecentGroupTentativeKafkaGroupId);
-        System.out.println("视频临近试探(videoRecentGroupTentativeSumLag)-->" + videoRecentGroupTentativeSumLag + " 监控返回值:" + videoRecentGroupTentativeMessage);
+        System.out.println("视频临近试探(videoRecentGroupTentativeSumLag)-->" + videoRecentGroupTentativeSumLag + " 监控返回值:" + videoRecentGroupTentativeMessage);*/
     }
 }
