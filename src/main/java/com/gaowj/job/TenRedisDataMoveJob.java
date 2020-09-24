@@ -49,31 +49,36 @@ public class TenRedisDataMoveJob implements Callable {
 
         while (keyIter.hasNext()) {
             String key = keyIter.next();
-            System.out.println("--------------key--------->" + key);
-            String type = singleJedis.type(key);
-            Jedis userJedis = RedisUtil.getUserJedis(key, shardingDb);
-            try {
-                switch (type) {
-                    case "list":
-                        listMove(userJedis, key);
-                        break;
-                    case "string":
-                        StringMove(userJedis, key);
-                        break;
-                    case "hash":
-                        hashMove(userJedis, key);
-                        break;
-                    case "set":
-                        setMove(userJedis, key);
-                        break;
+            int uidHcode = Math.abs(key.hashCode());
+            int num = uidHcode % 100;
+            if (num > 94 || key.startsWith("debugcoldpy") || key.startsWith("debugcoldtest")) {
+                // python线上用户
+                System.out.println("--------------key--------->" + key);
+                String type = singleJedis.type(key);
+                Jedis userJedis = RedisUtil.getUserJedis(key, shardingDb);
+                try {
+                    switch (type) {
+                        case "list":
+                            listMove(userJedis, key);
+                            break;
+                        case "string":
+                            StringMove(userJedis, key);
+                            break;
+                        case "hash":
+                            hashMove(userJedis, key);
+                            break;
+                        case "set":
+                            setMove(userJedis, key);
+                            break;
+                    }
+                    int ttl = singleJedis.ttl(key).intValue();
+                    if (-1 != ttl)
+                        userJedis.expire(key, ttl);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    userJedis.close();
                 }
-                int ttl = singleJedis.ttl(key).intValue();
-                if (-1 != ttl)
-                    userJedis.expire(key, ttl);
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                userJedis.close();
             }
         }
 

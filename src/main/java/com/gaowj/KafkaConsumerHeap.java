@@ -26,9 +26,10 @@ public class KafkaConsumerHeap {
     }
 
     //企业发送报警
-    public static String sendMessage(int sumLag, int alarmLag, String message) {
-        String alarmMessage = "{\"msgGroup\": \"MANGROUP\",\"title\": \"" + message + "\",\"content\": \"" + message + "\",\"account\": \"gaowj\",\"url\": \"http://local.datacenter.ifengidc.com/local/sendWechatMsg\"}";
+    public static String sendMessage(int sumLag, int alarmLag, String message, String staff) {
         if (sumLag >= alarmLag) {
+            String alarmMessage = "{\"msgGroup\": \"MANGROUP\",\"title\": \"" + message + "\",\"content\": \"" + message + ",堆积量为:" + sumLag + ",设置最大报警量为:" + alarmLag + "\",\"account\": \"" + staff + "\",\"url\": \"http://local.datacenter.ifengidc.com/local/sendWechatMsg\"}";
+//            System.out.println(alarmMessage);
             String returnStr = HttpUtil.doPost2(Constant.WECHAT_MESSAGE, alarmMessage);
             return returnStr;
         }
@@ -40,6 +41,7 @@ public class KafkaConsumerHeap {
         String projectName = args[0];
         String recentUserArticleKafkaGroupId = args[1];  // 消费者组
         int recentUserArticleAlarmLag = Integer.parseInt(args[2]); //期望最大堆积值
+        String staff = args[3];
         /*//新闻临近试探
         String recentGroupTentativeKafkaGroupId = args[2];
         int recentGroupTentativeAlarmLag = Integer.parseInt(args[3]);
@@ -54,7 +56,7 @@ public class KafkaConsumerHeap {
         String recentUserArticle = HttpUtil.doGet(Constant.KAFKA_SUM_LAG + recentUserArticleKafkaGroupId);
         int recentUserArticleSumLag = KafkaConsumerHeap.getSumLag(recentUserArticle);
         String message = projectName + "kafka消息堆积,groupId:";
-        String recentUserArticleMessage = KafkaConsumerHeap.sendMessage(recentUserArticleSumLag, recentUserArticleAlarmLag, message + recentUserArticleKafkaGroupId);
+        String recentUserArticleMessage = KafkaConsumerHeap.sendMessage(recentUserArticleSumLag, recentUserArticleAlarmLag, message + recentUserArticleKafkaGroupId, staff);
         System.out.println(projectName + "堆积值(sumLag)-->" + recentUserArticleSumLag + " 监控返回值:" + recentUserArticleMessage);
         /*//新闻临近试探
         String recentGroupTentative = HttpUtil.doGet(Constant.KAFKA_SUM_LAG + recentGroupTentativeKafkaGroupId);
