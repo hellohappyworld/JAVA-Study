@@ -12,6 +12,8 @@ public class Constant {
     public static final String RECENTGROUPTENTATIVE_KAFKA_GROUP_ID = "kafka_coldboot_202006231604";
     //PublicKafkaCluster消费堆积接口
     public static final String KAFKA_SUM_LAG = "http://local.datacenter.ifengidc.com/local/monitor/kafkaLagMonitor?cluster=PublicKafkaCluster&groupID=";
+    //腾讯云Kafka消费堆积接口
+    public static final String TENCENT_KAFKA_SUM_LAG = "http://local.datacenter.ifengidc.com/local/monitor/kafkaLagMonitor?cluster=TencentKafka&groupID=";
     //企业微信报警接口
     public static final String WECHAT_MESSAGE = "http://local.datacenter.ifengidc.com/local/sendWechatMsg";
 }
