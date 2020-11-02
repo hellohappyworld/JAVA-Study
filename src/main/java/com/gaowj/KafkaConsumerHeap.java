@@ -4,6 +4,9 @@ import com.alibaba.fastjson.JSON;
 import com.gaowj.common.Constant;
 import com.gaowj.utils.HttpUtil;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * created by gaowj.
  * created on 2020-06-24.
@@ -28,7 +31,10 @@ public class KafkaConsumerHeap {
     //企业发送报警
     public static String sendMessage(int sumLag, int alarmLag, String message, String staff) {
         if (sumLag >= alarmLag) {
-            String alarmMessage = "{\"msgGroup\": \"MANGROUP\",\"title\": \"" + message + "\",\"content\": \"" + message + ",堆积量为:" + sumLag + ",设置最大报警量为:" + alarmLag + "\",\"account\": \"" + staff + "\",\"url\": \"http://local.datacenter.ifengidc.com/local/sendWechatMsg\"}";
+            Date date = new Date();
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String format = simpleDateFormat.format(date);
+            String alarmMessage = "{\"msgGroup\": \"MANGROUP\",\"title\": \"" + message + "\",\"content\": \"" + message + ",堆积量为:" + sumLag + ",设置最大报警量为:" + alarmLag + ",报警时间:" + format + "\",\"account\": \"" + staff + "\",\"url\": \"http://local.datacenter.ifengidc.com/local/sendWechatMsg\"}";
 //            System.out.println(alarmMessage);
             String returnStr = HttpUtil.doPost2(Constant.WECHAT_MESSAGE, alarmMessage);
             return returnStr;
