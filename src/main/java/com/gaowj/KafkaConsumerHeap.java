@@ -34,9 +34,9 @@ public class KafkaConsumerHeap {
             Date date = new Date();
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String format = simpleDateFormat.format(date);
-            String alarmMessage = "{\"msgGroup\": \"MANGROUP\",\"title\": \"" + message + "\",\"content\": \"" + message + ",堆积量为:" + sumLag + ",设置最大报警量为:" + alarmLag + ",报警时间:" + format + "\",\"account\": \"" + staff + "\",\"url\": \"http://local.datacenter.ifengidc.com/local/sendWechatMsg\"}";
+            String alarmMessage = "{\"msgtype\": \"text\",\"text\": {\"content\": \""  + message + ",堆积量为:" + sumLag + ",设置最大报警量为:" + alarmLag + ",报警时间:" + format + "\"}}";
 //            System.out.println(alarmMessage);
-            String returnStr = HttpUtil.doPost2(Constant.WECHAT_MESSAGE, alarmMessage);
+            String returnStr = HttpUtil.doPost2(Constant.WECHAT_ROBOT_MESSAGE, alarmMessage);
             return returnStr;
         }
         return "未大批量堆积";

@@ -1,6 +1,7 @@
 package com.gaowj.utils;
 
 import com.alibaba.fastjson.JSONObject;
+import com.gaowj.common.Constant;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
@@ -315,12 +316,7 @@ public class HttpUtil {
 
 
     public static void main(String[] args) {
-//        String url = "http://local.datacenter.ifengidc.com/local/monitor/kafkaLagMonitor?cluster=PublicKafkaCluster&groupID=kafka_coldboot_202006232050";
-//        String s = HttpUtil.doGet(url);
-//        System.out.println(s);
-        String message = "{\"msgGroup\": \"MANGROUP\",\"title\": \"" + "测试测试" + "\",\"content\": \"" + "测试测试" + "\",\"account\": \"gaowj\",\"url\": \"http://local.datacenter.ifengidc.com/local/sendWechatMsg\"}";
-        String s = HttpUtil.doPost2("http://local.datacenter.ifengidc.com/local/sendWechatMsg", message);
-        System.out.println(s);
+        HttpUtil.doPost2(Constant.WECHAT_ROBOT_MESSAGE, "{\"msgtype\": \"text\",\"text\": {\"content\": \"下班了下班了，开溜了\"}}");
     }
 
 }
