@@ -59,7 +59,7 @@ public class KafkaConsumerHeap {
         int videoRecentGroupTentativeAlarmLag = Integer.parseInt(args[7]);*/
 
         //新闻正反馈
-        String recentUserArticle = HttpUtil.doGet(Constant.TENCENT_KAFKA_SUM_LAG + recentUserArticleKafkaGroupId);
+        String recentUserArticle = HttpUtil.doGet(Constant.KAFKA_SUM_LAG + recentUserArticleKafkaGroupId);
         int recentUserArticleSumLag = KafkaConsumerHeap.getSumLag(recentUserArticle);
         String message = projectName + "kafka消息堆积,groupId:";
         String recentUserArticleMessage = KafkaConsumerHeap.sendMessage(recentUserArticleSumLag, recentUserArticleAlarmLag, message + recentUserArticleKafkaGroupId, staff);
