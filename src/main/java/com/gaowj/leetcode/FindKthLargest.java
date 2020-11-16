@@ -16,7 +16,7 @@ import org.junit.Test;
  * origin ->
  */
 public class FindKthLargest {
-    public static int getPartIndex(int[] nums, int mark, int start, int end) {
+    public static int partIndex(int[] nums, int mark, int start, int end) {
         int j = start;
         for (int i = start; i <= end; i++) {
             if (nums[i] <= mark) {
@@ -27,20 +27,33 @@ public class FindKthLargest {
         return j - 1;
     }
 
-    public static void swap(int[] nums, int i, int j) {
+    public static void swap(int nums[], int i, int j) {
         int swap = nums[i];
         nums[i] = nums[j];
         nums[j] = swap;
     }
 
-    public static void getKthLargest(int[] nums, int mark, int start, int end, int goalIndex) {
-        if (start == end)
+    public static void findeK(int[] nums, int mark, int start, int end, int k) {
+        int part = partIndex(nums, mark, start, end);
+        if (part == k) {
             return;
-        int partIndex = getPartIndex(nums, mark, start, end);
-//        if(partIndex==)
+        } else if (part < k) {
+            findeK(nums, nums[end], part + 1, end, k);
+        } else {
+            findeK(nums, nums[part - 1], start, part - 1, k);
+        }
+    }
+
+    public static int findKthLargest(int[] nums, int k) {
+        int kMaxIndex = nums.length - k;
+        findeK(nums, nums[nums.length - 1], 0, nums.length - 1, kMaxIndex);
+        return nums[kMaxIndex];
     }
 
     public static void main(String[] args) {
-
+        int[] nums = {3, 2, 1, 5, 6, 4};
+        int k = 2;
+        int kthLargest = findKthLargest(nums, k);
+        System.out.println(nums[kthLargest]);
     }
 }
