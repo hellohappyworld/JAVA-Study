@@ -3,7 +3,7 @@ package com.gaowj.leetcode;
 /**
  * created by gaowj.
  * created on 2020-11-17.
- * function: 归并排序算法
+ * function: 归并排序
  * 平均时间复杂度： O(NLogN)
  * 最好情况时间复杂度： O(NLogN)
  * 最差情况时间复杂度： O(NLogN)
