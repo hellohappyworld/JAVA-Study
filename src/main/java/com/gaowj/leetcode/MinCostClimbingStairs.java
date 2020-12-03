@@ -9,18 +9,24 @@ package com.gaowj.leetcode;
  * 每当你爬上一个阶梯你都要花费对应的体力花费值，然后你可以选择继续爬一个阶梯或者爬两个阶梯。
  * <p>
  * 您需要找到达到楼层顶部的最低花费。在开始时，你可以选择从索引为 0 或 1 的元素作为初始阶梯。
- * origin -> https://leetcode-cn.com/problems/min-cost-climbing-stairs/
+ * origin -> https://leetcode-cn.com/problems/min-cost-climbing-stairs/solution/yi-bu-yi-bu-tui-dao-dong-tai-gui-hua-de-duo-chong-/
  */
 public class MinCostClimbingStairs {
-    public static int minCostClimbingStairs(int[] cost, int n) {
-        if (n == 0 || n == 1)
-            return cost[n];
-        return Math.min(minCostClimbingStairs(cost, n - 1), minCostClimbingStairs(cost, n - 2)) + cost[n];
+    public static int minCostClimbingStairs(int[] cost) {
+        int[] dp = new int[cost.length];
+        dp[0] = cost[0];
+        dp[1] = cost[1];
+        for (int i = 2; i < cost.length; i++) {
+            dp[i] = Math.min(dp[i - 2], dp[i - 1]) + cost[i];
+            System.out.println(i + "->" + dp[i]);
+        }
+
+        return Math.min(dp[cost.length - 1], dp[cost.length - 2]);
     }
 
 
     public static void main(String[] args) {
-        int[] cost = {10, 15, 20};
-        System.out.println(minCostClimbingStairs(cost, cost.length - 1));
+        int[] cost = {1, 100, 1, 1, 1, 100, 1, 1, 100, 1};
+        System.out.println(minCostClimbingStairs(cost));
     }
 }
