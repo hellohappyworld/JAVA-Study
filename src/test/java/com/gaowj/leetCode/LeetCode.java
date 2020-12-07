@@ -1,6 +1,7 @@
 package com.gaowj.leetCode;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * created by gaowj.
@@ -10,11 +11,7 @@ import java.util.ArrayList;
  */
 public class LeetCode {
     public static void main(String[] args) {
-        ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add("1");
-        arrayList.add("2");
-        arrayList.add("3");
-        System.out.println(arrayList.get(3));
+        String[] arr={"1","2","3"};
     }
 
     public static int climbStairs(int n) {
