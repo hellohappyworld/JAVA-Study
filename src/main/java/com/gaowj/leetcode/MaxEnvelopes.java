@@ -26,14 +26,21 @@ public class MaxEnvelopes {
             }
         });
 
-        int max = 0;
+        int max = 1;
         int[] dp = new int[envelopes.length];
-        for (int i = 0; i < envelopes.length; i++) {
-
+        dp[0] = 1;
+        for (int i = 1; i < envelopes.length; i++) {
+            dp[i] = 1;
+            for (int j = 0; j < i; j++) {
+                if (envelopes[i][1] > envelopes[j][1])
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
+                max = Math.max(max, dp[i]);
+            }
         }
 
-        return 1;
+        return max;
     }
+
 
     public static void main(String[] args) {
         int[][] envelopes = {{1, 5}, {1, 4}, {1, 2}, {2, 3}};
