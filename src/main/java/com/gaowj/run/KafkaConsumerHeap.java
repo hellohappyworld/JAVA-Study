@@ -1,4 +1,4 @@
-package com.gaowj;
+package com.gaowj.run;
 
 import com.alibaba.fastjson.JSON;
 import com.gaowj.common.Constant;

@@ -1,4 +1,4 @@
-package com.gaowj;
+package com.gaowj.run;
 
 import com.gaowj.job.TenRedisDataMoveJob;
 import com.gaowj.utils.RedisPool;
