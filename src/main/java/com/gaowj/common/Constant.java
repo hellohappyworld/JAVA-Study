@@ -6,10 +6,6 @@ package com.gaowj.common;
  * function:
  */
 public class Constant {
-    //新闻正反馈
-    public static final String RECENTUSERARTICLE_KAFKA_GROUP_ID = "kafka_coldboot_202006232050";
-    //新闻临近试探
-    public static final String RECENTGROUPTENTATIVE_KAFKA_GROUP_ID = "kafka_coldboot_202006231604";
     //PublicKafkaCluster消费堆积接口
     public static final String KAFKA_SUM_LAG = "http://local.datacenter.ifengidc.com/local/monitor/kafkaLagMonitor?cluster=PublicKafkaCluster&groupID=";
     //腾讯云Kafka消费堆积接口
