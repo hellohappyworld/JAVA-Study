@@ -1,5 +1,9 @@
 package com.gaowj.leetcode;
 
+import jdk.internal.org.objectweb.asm.tree.IincInsnNode;
+
+import java.util.HashMap;
+
 /**
  * created by gaowj.
  * created on 2020-11-17.
@@ -13,6 +17,20 @@ package com.gaowj.leetcode;
  * 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
  */
 public class TwoSum {
+
+    /**
+     * 哈希表
+     */
+    public int[] twoSum(int[] nums, int target) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (map.containsKey(target - nums[i]))
+                return new int[]{map.get(target - nums[i]), i};
+            map.put(nums[i], i);
+        }
+        return null;
+    }
+
 
     /**
      * 二分查找：获取两数之和等于目标值的两个下标
