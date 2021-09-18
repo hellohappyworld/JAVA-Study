@@ -45,7 +45,7 @@ public class QuickSort {
      * 递归对不同partition排序
      *
      * @param nums
-     * @param mark
+     * @param mark 基准元素
      * @param start
      * @param end
      */
@@ -65,12 +65,12 @@ public class QuickSort {
     }
 
     public static void main(String[] args) {
-        int[] nums = {8, 2, 1, 7, 3, 5, 9, 6};
+        int[] nums = {5, 1, 1, 2, 0, 0, 9, 6};
         int end = nums.length - 1;
         partRecursion(nums, nums[end], 0, end);
         String outStr = "";
         for (int i : nums) {
-            outStr = outStr + "," + String.valueOf(i);
+            outStr = outStr + " " + String.valueOf(i);
         }
         System.out.println(outStr);
     }
