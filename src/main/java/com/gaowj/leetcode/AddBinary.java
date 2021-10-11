@@ -9,7 +9,7 @@ package com.gaowj.leetcode;
  * origin -> https://leetcode-cn.com/problems/add-binary/solution/hua-jie-suan-fa-67-er-jin-zhi-qiu-he-by-guanpengch/
  */
 public class AddBinary {
-    public static String addBinary(String a, String b) {
+    public static String addBinary1(String a, String b) {
         StringBuilder res = new StringBuilder();
         int carry = 0; //进位
         for (int i = a.length() - 1, j = b.length() - 1; i >= 0 || j >= 0; i--, j--) {
@@ -23,7 +23,31 @@ public class AddBinary {
         return res.reverse().toString();
     }
 
+    public String addBinary(String a, String b) {
+        StringBuilder res = new StringBuilder();
+        int carray = 0;
+        int i = a.length() - 1;
+        int j = b.length() - 1;
+
+        while (i >= 0 || j >= 0) {
+            int x = i < 0 ? 0 : a.charAt(i) - '0';
+            int y = j < 0 ? 0 : b.charAt(j) - '0';
+
+            int sum = x + y + carray;
+            res.append(sum % 2);
+            carray = sum > 1 ? 1 : 0;
+
+            i--;
+            j--;
+        }
+
+        if (carray != 0)
+            res.append(carray);
+
+        return res.reverse().toString();
+    }
+
     public static void main(String[] args) {
-        System.out.println(addBinary("11", "1"));
+        System.out.println(addBinary1("11", "1"));
     }
 }
