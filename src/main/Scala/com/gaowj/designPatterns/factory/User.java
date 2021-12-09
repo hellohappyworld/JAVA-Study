@@ -1,6 +1,5 @@
 package com.gaowj.designPatterns.factory;
 
-import org.junit.Test;
 
 /**
  * created by gaowj.
@@ -9,7 +8,6 @@ import org.junit.Test;
  * origin ->
  */
 public class User {
-    @Test
     public void eat() {
         IFactory appleFactory = new AppleFactory();
         IFactory pearFactory = new PearFactory();
